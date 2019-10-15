@@ -20,3 +20,17 @@
 .App-link {
   color: #09d3ac;
 }
+.background {
+  height: 100%;
+  width: 100%;
+  background-image: url("https://download.hipwallpaper.com/desktop/1536/864/14/4/fBCWJa.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 1;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
