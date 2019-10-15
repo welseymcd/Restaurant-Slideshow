@@ -11,7 +11,7 @@ export default function Slideshow({barOverride, barFrequency, displayInSeconds})
                     "http://blogliterati.com/wp-content/uploads/2018/03/Texas-Roadhouse-La-Mer_3.jpg"
     ]
     const imagesRef = database.ref().child("114").child("slideshowImages");
-
+   
     barFrequency = 3;
     displayInSeconds = 5;
     const [currentImage, setCurrentImage] = useState(0);
@@ -50,7 +50,10 @@ export default function Slideshow({barOverride, barFrequency, displayInSeconds})
          }
          console.log("New Bar loaded")
     }  
-
+    useEffect(()=>{
+        document.body.style.overflow = "hidden";
+        return ()=> document.body.style.overflow = "visible"
+    }, [])
     // This use effect sets up a listener for the firebase database
     // listening for changes to the bar layout
     useEffect(()=>{
