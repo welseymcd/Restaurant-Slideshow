@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { GridList, GridListTile } from "@material-ui/core";
+import { GridList, Grid, Card, CardActionArea, CardMedia, CardActions, Button } from "@material-ui/core";
 
 import Firebase from "../Firebase";
 
 const database = Firebase.database();
-function Images() {
+function Images({deleteImage, filter}) {
     const [imageData, setImageData] = useState(null);
     const imagesRef = database.ref().child("114").child("slideshowImages");
     
@@ -22,17 +22,42 @@ function Images() {
     console.log(imageData)
     return(
         <div>
-            <GridList cellHeight={160} cols={4}>
-                {(imageData !== null) ? Object.keys(imageData).map(key=> {
+            <Grid spacing={4} container>
+                {(imageData !== null) ? Object.keys(imageData).filter((key)=>{
+                    if(imageData[key].status === filter) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }).map(key=> {
                     var image = imageData[key];
                     return(
-                    <GridListTile key = {key}>
-                        <img src={image.url} alt="Yup"/>
-                    </GridListTile>
+                    <Grid item style={{height: "30vh", marginTop: "24px"}} xs={3} key = {key}>
+                        <Image deleteImage={deleteImage} id ={key} image={image} />
+                    </Grid>
                 )}): null}
-            </GridList>
+            </Grid>
         </div>
     )
 }
 
+function Image ({id, image, deleteImage}){
+    return(
+    <Card>
+        <CardActionArea>
+            <CardMedia
+                height="240"
+                width="100vw" 
+                component="img"
+                image={image.url}
+            />
+        </CardActionArea>
+        <CardActions>
+            <Button size="small" color="primary" onClick={()=>deleteImage(id, image.status)}>
+                {image.status==="active" ? "Delete" : "Undo" }
+            </Button>
+        </CardActions>
+    </Card>
+    )
+}
 export default Images

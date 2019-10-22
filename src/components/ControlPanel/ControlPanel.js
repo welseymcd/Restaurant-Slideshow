@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import Bar from '../Bar';
+import {BarManage} from '../Bar';
 import Firebase from "../Firebase";
 import ImageUpload from "../ControlPanel/ImageUpload";
 import Images from "./Images";
@@ -8,6 +8,7 @@ import {Drawer, MenuList, IconButton, AppBar, Toolbar, Typography, MenuItem, But
 import MenuIcon from "@material-ui/icons/Menu";
 
 import {Route, Switch, useRouteMatch, useParams, Link} from "react-router-dom";
+import { ImageControlPanel } from './ImageControl';
 const testBarSetup = [
     [{"type":0,
     "clean": true},{"type":0,
@@ -108,9 +109,7 @@ const useStyles = makeStyles(theme => ({
     menuButton: {
         marginRight: theme.spacing(2),
     }, 
-    root: {
-        flexGrow: 1,
-    },
+
     title: {
         flexGrow: 1,
     }
@@ -154,12 +153,7 @@ function ControlPanel(){
      return () => {barLayoutRef.off("value", handleNewBarSeats);}
     }, [])
     
-    const onSave = (id, url) =>{
-        console.log("Google File Saved: " + id)
-        console.log(url);
-        imagesRef.child(id).set({url: url});
-        setUploadImageId(null);
-    }
+
 
     return(
         <div className={classes.root}>
@@ -174,11 +168,10 @@ function ControlPanel(){
             </AppBar>
             <Switch>
                 <Route path={`${match.path}/bar`}>
-                    <Bar barArea={barSeats} setBarArea={setBarArea} />
+                    <BarManage barArea={barSeats} setBarArea={setBarArea} />
                 </Route>
                 <Route path={match.path}>
-                    <ImageUpload defaultFiles={[]} onRequestClear={()=>{setUploadImageId(null)}} onRequestSave={onSave} />
-                    <Images />
+                    <ImageControlPanel />
                 </Route>
             </Switch>
             <Drawer open={drawerOpen} onClose={toggleDrawer()}>
@@ -193,11 +186,11 @@ function ControlPanel(){
 
 const DrawerMenu = () =>{
     return(<MenuList>
-        <MenuItem component="Button">
-            <Link to="/manage/"><Typography variant="inherit">Image Management</Typography></Link>
+        <MenuItem component={Link} to={"/manage/"}>
+            <Typography variant="inherit">Image Management</Typography>
         </MenuItem>
-        <MenuItem>
-            <Link to="/manage/bar"><Typography variant="inherit">Bar Area Management</Typography></Link>
+        <MenuItem component={Link} to={"/manage/bar"}>
+            <Typography variant="inherit">Bar Area Management</Typography> 
         </MenuItem>
     </MenuList>
     );

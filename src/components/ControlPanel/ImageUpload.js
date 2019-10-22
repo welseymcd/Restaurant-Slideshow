@@ -6,7 +6,7 @@ import shortid from "shortid";
 import {FilePond, registerPlugin} from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-
+import {Toolbar} from "@material-ui/core";
 
 // And import the necessary css
 import "filepond/dist/filepond.min.css"
@@ -51,7 +51,10 @@ const imagesRef = database.ref().child("114").child("slideshowImages");
               storage.child("images/"+id)
               .getDownloadURL()
               .then(url => {
-                imagesRef.child(id).set({url: url}).then(()=>{
+                imagesRef.child(id).set({
+                  url: url,
+                  status: "active"
+                }).then(()=>{
                     console.log("Added to database")
                 });
                   
@@ -90,26 +93,27 @@ const imagesRef = database.ref().child("114").child("slideshowImages");
         },
       }
     return (
-      <FilePond
-        files={files}
-        allowMultiple={true}
-        maxFiles={10}
-        onprocessfiles={()=>{
-            setTimeout(()=>{
-                console.log("Timeout running");
-                setFiles([]);
-            }, 5000)
-        }}
-        onupdatefiles={fileItems => {
-          if (fileItems.length === 0) {
-            setFiles([]);
-            onRequestClear()
-          }
-  
-          setFiles(fileItems.map(fileItem => fileItem.file))
-        }}
-        server={server} // todo: add custom server functionality using firebase
-      />
+      <div>
+        <FilePond
+          files={files}
+          allowMultiple={true}
+          maxFiles={10}
+          onprocessfiles={()=>{
+              setTimeout(()=>{
+                  console.log("Timeout running");
+                  setFiles([]);
+              }, 5000)
+          }}
+          onupdatefiles={fileItems => {
+            if (fileItems.length === 0) {
+              setFiles([]);
+              onRequestClear()
+            }
+    
+            setFiles(fileItems.map(fileItem => fileItem.file))
+          }}
+          server={server} // todo: add custom server functionality using firebase
+        />
+      </div>
     )
   }
-
