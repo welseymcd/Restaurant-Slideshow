@@ -128,9 +128,9 @@ export default function Slideshow({barOverride, barFrequency, displayInSeconds})
     // - Make the slideshow delay and option?
     
     useEffect(()=>{
-        const timer = setTimeout(timerFunction, 5000);
+        const timer = setInterval(timerFunction, 5000);
         console.log(elements.length)
-        return (()=> clearTimeout(timer))
+        return (()=> clearInterval(timer))
     }, [currentImage, slidesSinceCustom])
     if(elements.length === 0){
         return(
