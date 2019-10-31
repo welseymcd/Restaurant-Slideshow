@@ -145,4 +145,4 @@ export default function Slideshow({barOverride, barFrequency, displayInSeconds})
             <Box height={1} display={((slidesSinceCustom >= barFrequency) && customSlideEnabled)?null:"none"}><BarView barArea={barSeats}/></Box>
         </Box>
     )
-}9
+}

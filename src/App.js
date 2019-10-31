@@ -6,6 +6,7 @@ import Bar from "./components/Bar";
 import { Box } from '@material-ui/core';
 import Slideshow from "./components/Slideshow";
 import ControlPanel from "./components/ControlPanel/ControlPanel"
+import {SlideShowTimer} from "./components/SlideshowPreload";
 function App() {
   return (
     <Router>
@@ -13,7 +14,7 @@ function App() {
         <Switch>
             <Route exact path="/">
               <Box height="99.77vh" alignItems="center">
-                <Slideshow />
+                <SlideShowTimer interval={5000} />
               </Box>
               <div className="background">
               </div>

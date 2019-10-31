@@ -1,6 +1,6 @@
 {
   "name": "slideshow",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.5.1",
@@ -37,5 +37,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Texas Roadhouse front TV slideshow",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/welseymcd/Restaurant-Slideshow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/welseymcd/Restaurant-Slideshow/issues"
+  },
+  "homepage": "/"
 }
