@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <Switch>
             <Route exact path="/">
-              <Box height="99.77vh" alignItems="center">
+              <Box height="100vh" style={{overflow:"hidden"}}alignItems="center">
                 <SlideShowTimer interval={5000} />
               </Box>
               <div className="background">

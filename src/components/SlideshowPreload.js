@@ -3,7 +3,6 @@ import Firebase from "./Firebase";
 import {Box} from "@material-ui/core";
 
 import {BarView} from "./Bar";
-import "./slideshow.css";
 const database = Firebase.database()
 
 const SlideShowTimer = ({interval}) => {
@@ -119,7 +118,7 @@ const SlideShowPreload = ({tick}) => {
         }
     }, [tick])
     return(
-        <Box alignItems="center" height={1} border={1}>
+        <Box alignItems="center" height={1}>
             <Box height={1} display={((imageElementViewState[0]))?null : "none"}><img height="100%" src={imageElementImageSource[0]} /></Box>
             <Box height={1} display={((imageElementViewState[1]))?null : "none"}><img height="100%" src={imageElementImageSource[1]} /></Box>
             <Box height={1} display={((imageElementViewState[2]))?null : "none"}><img height="100%" src={imageElementImageSource[2]} /></Box>
